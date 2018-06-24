@@ -1,0 +1,18 @@
+# 通过jenkins 构建springboot项目并push到docker-resitory
+
+1.首先需要有springboot项目在pom文件中集成docker(参考springboot-demo)
+2.之后配置jenkins job build这个demo ： clean package docker:build
+3.之后需要把生成的镜像push到docker-resitory中
+  3.1.首先需要pull一个resitory镜像到本地
+  3.2.之后把启动镜像（docker run -d -p 5000:5000 --privileged=true -v /data/docker/registry:/var/lib/registry  -v /data/docker/registry/config.yml:/etc/docker/registry/config.yml  registry）
+      -v 是挂载本地目录到容器就不多做阐述了
+      –privileged=true ：CentOS7中的安全模块selinux把权限禁掉了，参数给容器加特权，不加上传镜像会报权限错误(OSError: [Errno 13] Permission denied: ‘/tmp/registry/repositories/liibrary’)或者（Received unexpected HTTP status: 500 Internal Server Error）错误
+  3.3.修改或新建 /etc/docker/daemon.json   添加以下内容
+      {
+        "insecure-registries": ["ip:5000"]
+      }
+  3.4.push前需要给镜像打一个tag
+      docker tag xxx/xxx regitry_ip:5000/xxxx:xxxx
+  3.5.之后把镜像push到私有仓库
+     docker push regitry_ip:5000/xxxx:xxx
+  3.6.push完成之后可以通过 regitry_ip：5000/v2/_catalog 查看镜像
