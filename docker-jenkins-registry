@@ -15,4 +15,4 @@
       docker tag xxx/xxx regitry_ip:5000/xxxx:xxxx
   3.5.之后把镜像push到私有仓库
      docker push regitry_ip:5000/xxxx:xxx
-  3.6.push完成之后可以通过 regitry_ip：5000/v2/_catalog 查看镜像
+  3.6.push完成之后可以通过 regitry_ip：5000/v2/_catalog 查看镜像 
