@@ -1,0 +1,27 @@
+应用场景：我要搭建一台Linux server，使用tomcat作为web容器，让别人维护web项目的发布，这时候会给他们一个普通用户（非root用户）。
+
+分析：tomcat的默认端口是8080，所有用户都可以启动，但是除内部系统外，一般我们会选择使用80作为端口，可是普通用户没有对80的权限。怎么办，这个时候可以提前把80端口映射到8080端口，当tomcat以8080端口启动后就可以使用80端口访问。
+  
+1.添加用户
+useradd yonyou
+
+2.更改用户的密码
+passwd yonyou 
+
+Yon_you@1988.
+
+3.给用户某个目录的读写删除权限
+
+chgrp -R yonyou /home/* && chown -R yonyou /home/* 
+chgrp -R yonyou /data/* && chown -R yonyou /data/* 
+
+4.给用户授予sudo权限
+echo "yonyou ALL=(ALL)     ALL " >>  /etc/sudoers 
+
+5.80端口转发到8080（普通用户没有权限开启1024以下的端口）
+
+iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080  
+
+
+参考：
+https://blog.csdn.net/zpf336/article/details/73163419
