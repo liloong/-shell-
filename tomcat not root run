@@ -22,6 +22,5 @@ echo "yonyou ALL=(ALL)     ALL " >>  /etc/sudoers
 
 iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 8080  
 
-
 参考：
 https://blog.csdn.net/zpf336/article/details/73163419
