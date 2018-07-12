@@ -1,0 +1,105 @@
+简介
+nginx是一款轻量级的web服务器，也是一款反向代理服务器（域名转发就是反向代理的功能）
+1.nginx可以直接支持rails和php的程序
+2.可以作为HTTP的反向代理服务器
+3.作为负载均衡服务器
+4.作为邮件代理服务器
+5.帮助前端实现动静分离
+特点 ： 高稳定，高性能，资源占用少，功能丰富并支持很多插件，模块化的维护，支持热部署
+一、安装：
+1.安装依赖
+yum -y install gcc zlib zlib-devel pcre-devel openssl openssl-devel
+2.下载安装包
+在nginx.org中可以下载想要的版本，$table version是稳定版本，下这个版本就行 
+tar -zxvf 你下好的tar包 
+进入你的nginx的压缩目录下，准备开始安装
+
+cd nginx-1.10.2
+./configure
+make
+make install
+进入nginx的安装目录
+
+whereis nginx
+cd /usr/local/nginx
+cd /sbin
+./nginx  可能会报错，使用下面的
+/usr/local/nginx/sbin/nginx
+nginx就已经安装启动好了，默认为80端口，输入localhost就可以看到nginx页面了
+
+二、域名解析配置
+进入ngxin的安装目录
+
+cd /usr/local/nginx
+cd conf
+创建vhost文件夹，用来存放各个域名的conf文件，这样做是为了更方便管理各个域名的解析，否则都写在nginx.conf下，随着时间的发展，内容会越来越多，不好管理
+mkdir vhost 
+vim nginx.conf
+
+在HTTPs server上的空白处insert
+include vhost/*.conf;
+
+保存退出
+编写一个配置文件 admin.happymmall.com.conf
+server {
+listen 80; #监听的是80端口
+#自动创建索引，如果为off，那么nginx就会给首页403错误，但要是知道了文件的具体路径，那么还是可以访问的
+#意思是你访问的时候，会把文件夹下的东西以目录的形式像你展示，例如下载软件的服务器，他就会有各种的软件的目录，当然对于一些js文件什么的，我们不想让别人看见，就会设置成off
+autoindex on;
+server_name admin.happymmall.com;  #线上的域名
+access_log /usr/local/nginx/logs/access.log combined;
+
+#默认不输入其他东西，打开首页的顺序
+index index.html index.htm index.jsp index.php;
+#下面的两个不重要，因为都在location下配置了
+#root /devsoft/apache-tomcat-7.0.73/webapps/mmall;
+#error_page 404 /404.html;
+if ( $query_string ~* ".*[\;'\<\>].*" ){
+        return 404;
+        }
+#主要的是location
+#转发到线上的一个文件夹中
+location = / {
+        root /product/front/mmall_admin_fe/dist/view;
+        index index.html;
+}
+location ~ .*\.(html|htm)$ {
+        root /product/front/mmall_admin_fe/dist/view;
+        index index.html;
+        }
+#如果输入了线上的域名，那么就会跳转到tomcat上
+location / {
+        proxy_pass http://127.0.0.1:8080/;
+        add_header Access-Control-Allow-Origin '*';
+        }
+}
+
+
+
+编写一个第二种配置文件，跳转到文件夹的例子 img.happymmall.com.conf
+server {
+    listen 80;
+    autoindex off;
+    server_name img.happymmall.com;
+    access_log /usr/local/nginx/logs/access.log combined;
+    index index.html index.htm index.jsp index.php;
+    #error_page 404 /404.html;
+    if ( $query_string ~* ".*[\;'\<\>].*" ){
+        return 404;
+    }
+
+    location ~ /(mmall_fe|mmall_admin_fe)/dist/view/* {
+        deny all;
+    }
+    #输入配置文件上的域名，就会跳转到文件夹
+    location / {
+        root /product/ftpfile/img/;
+        add_header Access-Control-Allow-Origin *;
+    }
+}
+
+
+创建编辑好后，要重启nginx生效
+./nginx -s reload
+
+Windows下的nginx安装和配置，同linux，大同小异，都是这个原理，只是要注意，在修改conf配置文件的时候，要把文件路径换成是windwos的文件路径
