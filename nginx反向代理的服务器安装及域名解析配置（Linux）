@@ -23,10 +23,16 @@ make install
 whereis nginx
 cd /usr/local/nginx
 cd /sbin
-./nginx  可能会报错，使用下面的
+./nginx  可能会报错，使用下面的启动nginx
 /usr/local/nginx/sbin/nginx
 nginx就已经安装启动好了，默认为80端口，输入localhost就可以看到nginx页面了
 
+#测试nginx配置是否正确
+/usr/local/nginx/sbin/nginx -t
+
+nginx修改配置后重载
+    /usr/local/nginx/sbin/nginx -s reload
+    
 二、域名解析配置
 进入ngxin的安装目录
 
