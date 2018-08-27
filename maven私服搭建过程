@@ -1,4 +1,24 @@
-搭建比较简单，主要是maven配置，3.10之后的nexue不支持jar包上传，可以通过pom文件配置 通过命令 mvn  deploy 直接push到私服当中
+1.搭建比较简单，主要是maven配置，3.10之后的nexue不支持jar包上传，可以通过pom文件配置 通过命令 mvn  deploy 直接push到私服当中
+2.权限管理，如果放到公网上，需要做权限管理，具体如下：
+  2.1. pom文件中增加：
+  	  <!-- 设定主仓库，下载jar用。 -->
+	  <repositories>
+	    <repository>
+	      <id>hrdev</id>
+	      <name>hrdev</name>
+	      <url>http://114.215.47.83:8081/repository/maven-public/</url>
+	    </repository>
+	  </repositories>
+  2.2 本地seting.xml中增加：
+    <!-- 下载jar用。需要注册并分配下载权限，参考：http://blog.51cto.com/786678398/1949363  -->
+    <server>
+      <id>hrdev</id>
+      <username>hrdev</username>
+      <password>hrdev321</password>
+    </server>
+    
+    
+
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!--
