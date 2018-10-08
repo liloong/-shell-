@@ -109,7 +109,21 @@ under the License.
 
   <!-- maven私服地址 -->
   <mirrors>
-       <mirror> 
+  <!-- 配置其他镜像 优先级：aliyun、中央仓库、私服--> 
+   <mirror>
+      <id>alimaven</id>
+      <name>central</name>
+	  <mirrorOf>central</mirrorOf>        
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+    </mirror>  
+    <mirror>  
+        <id>repo2</id>  
+        <mirrorOf>central</mirrorOf>  
+        <name>Human Readable Name for this Mirror.</name>  
+        <url>http://repo2.maven.org/maven2/</url>  
+    </mirror>
+	<!-- maven私服 -->
+    <mirror> 
 		 <id>maven-public</id> 
 		 <mirrorOf>central</mirrorOf>   
 		 <name>maven-public</name> 
