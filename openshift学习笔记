@@ -1,0 +1,9 @@
+1.openshift 基于docker及kubernetes
+
+kubernetes {
+    pod:
+    service: {
+      Cluster IP 属于kubernetes集群内部访问IP，外部无法访问，可以通过修改该service的yaml文件中的type属性为NodePort
+    }
+    
+}
