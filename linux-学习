@@ -1,0 +1,12 @@
+# 常用命令
+  1.wc 统计行数/字数/字符数   wc /etc/profile 
+  2.tee 把输入复制到两个地方  cat /etc/profile | tee /home/jboss/a.txt
+  3.head 和 tail 读取文件的开头或者结尾  tail -n 10 /etc/profile
+  4.grep 搜索文本 打印匹配行数 -c  忽略大小写  -i 打印不匹配行 -v  -l(小写L)只打印匹配文件的名字
+    grep -l java /etc/*
+# bash脚本编程 
+  1. #!/bin/bash  "#!"声明是一个脚本，要由/bin/bash来解释
+  2.echo "Hello Word!" 
+  3.
+  
+   
