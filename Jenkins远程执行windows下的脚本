@@ -1,0 +1,16 @@
+node
+{
+    sshPublisher(
+        publishers: [sshPublisherDesc(configName: '10.144.1.119(windows)', transfers: [sshTransfer(execCommand: 'cd workspace && cmd /c chcp 65001 && cmd /c mvncompile.bat', execTimeout: 120000, sourceFiles: '*.jar')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)]
+        )
+}
+
+
+#需求：使用Jenkins pipeline 远程执行windows下的脚本（拉取svn上的代码编译通过后push到gitlab私有仓库）
+#环境： Jenkins Linux ，windows server12 ，脚本编码设置为utf-8
+
+#以上为pipeline生成的脚本
+#需要安装 Publish Over SSH Jenkins插件（因为PaaS平台不能连接外网需要离线安装），之后进入系统设置设置Publish Over SSH配置
+# cmd /c 解決找不到命令
+# chcp 65001 将CMD窗口切换成UTF-8代码页
+# cmd /c mvncompile.bat 执行脚本
