@@ -7,7 +7,7 @@ node
 
 
 #需求：使用Jenkins pipeline 远程执行windows下的脚本（拉取svn上的代码编译通过后push到gitlab私有仓库）
-#环境： Jenkins Linux ，windows server12 ，脚本编码设置为utf-8
+#环境： Jenkins Linux ，windows server12 需要安装openssh，脚本编码设置为utf-8
 
 #以上为pipeline生成的脚本
 #需要安装 Publish Over SSH Jenkins插件（因为PaaS平台不能连接外网需要离线安装），之后进入系统设置设置Publish Over SSH配置
