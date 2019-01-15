@@ -14,3 +14,7 @@ node
 # jenkins远程执行ssh脚本windows失败问题 在脚本命令执行之前 cmd /c 解決找不到命令
 # chcp 65001 将CMD窗口切换成UTF-8代码页
 # cmd /c mvncompile.bat 执行脚本
+
+
+###遇到问题： 先安装openssh后安装maven jdk ，导致ssh到windows执行脚本时mvn 找不到命令 ，jdk为旧的1.6的版本
+###解决方案： 重新安装openssh 就解决该问题。
