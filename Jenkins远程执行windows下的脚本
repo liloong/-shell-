@@ -11,6 +11,6 @@ node
 
 #以上为pipeline生成的脚本
 #需要安装 Publish Over SSH Jenkins插件（因为PaaS平台不能连接外网需要离线安装），之后进入系统设置设置Publish Over SSH配置
-# cmd /c 解決找不到命令
+# jenkins远程执行ssh脚本windows失败问题 在脚本命令执行之前 cmd /c 解決找不到命令
 # chcp 65001 将CMD窗口切换成UTF-8代码页
 # cmd /c mvncompile.bat 执行脚本
