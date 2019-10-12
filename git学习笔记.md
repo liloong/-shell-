@@ -16,12 +16,14 @@ git branch dev
 #### 切换到dev分支
 git checkout dev
 
+#### 提交单个文件
+git add filename
 
-#### 
+#### 提交全部文件
 git add .
 
 #### 
-git commit -m "commit"
+git commit -m "内容"
 
 #### 
 git push
