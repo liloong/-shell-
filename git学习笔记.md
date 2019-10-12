@@ -25,5 +25,14 @@ git add .
 #### 
 git commit -m "内容"
 
-#### 
+#### 提交到远程仓库
 git push
+
+#### 提交到远程分支仓库
+git origin 本地分支名：远程分支名
+
+#### git checkout -b test 是git branch iss53 git checkout iss53这两条命令的简写
+git checkout -b test
+
+
+
