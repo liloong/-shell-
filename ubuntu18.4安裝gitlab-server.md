@@ -8,7 +8,7 @@ sudo tar -xvf VMwareTools-10.3.10-12406962.tar.gz
 cd vmware-tools-distrib/
 sudo ./vmware-install.pl
 
-###2.更换apt源提高下载速度
+### 2.更换apt源提高下载速度
 cd /etc/apt/
 sudo cp sources.list sources.list.bak
 sudo gedit sources.list
