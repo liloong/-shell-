@@ -1,0 +1,2 @@
+expdp hrnew/hrnew@127.0.0.1:1521/orcl schemas=hrnew dumpfile=1.dmp
+impdp hr2057/hr2057@127.0.0.1:1521/orcl  dumpfile=NC_57.dmp  REMAP_SCHEMA=cnooctest:hr2057
