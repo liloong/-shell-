@@ -1,2 +1,4 @@
 expdp hrnew/hrnew@127.0.0.1:1521/orcl schemas=hrnew dumpfile=1.dmp
 impdp hr2057/hr2057@127.0.0.1:1521/orcl  dumpfile=NC_57.dmp  REMAP_SCHEMA=cnooctest:hr2057
+
+CREATE TABLESPACE NNC_DATA01 DATAFILE 'E:\oracledata\nnc_data01.dbf' SIZE 500M AUTOEXTEND ON NEXT 50M EXTENT MANAGEMENT LOCAL UNIFORM SIZE 256K ;      
